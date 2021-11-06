@@ -1,6 +1,5 @@
-import 'package:align_positioned/align_positioned.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:day40/pages/send_money.dart';
+import 'package:wrizt/pages/send_money.dart';
 import 'package:flutter/material.dart';
 
 class ContactPage extends StatefulWidget {
@@ -14,26 +13,62 @@ class _ContactPageState extends State<ContactPage> {
   List<dynamic> _contacts = [
     {
       'name': 'John',
+      'user': 'celebritydeveloper',
       'avatar': 'assets/images/avatar-1.png',
     },
     {
       'name': 'Samantha',
+      'user': 'maskman',
       'avatar': 'assets/images/avatar-2.png',
     },
     {
       'name': 'Mary',
+      'user': 'holymary',
       'avatar': 'assets/images/avatar-3.png',
     },
     {
       'name': 'Julian',
+      'user': 'bankyw',
       'avatar': 'assets/images/avatar-4.png',
     },
     {
       'name': 'Sara',
+      'user': 'muna',
       'avatar': 'assets/images/avatar-5.png',
     },
     {
       'name': 'Kabir Singh',
+      'user': 'moneyman',
+      'avatar': 'assets/images/avatar-6.png',
+    },
+    {
+      'name': 'John',
+      'user': 'hustler',
+      'avatar': 'assets/images/avatar-1.png',
+    },
+    {
+      'name': 'Samantha',
+      'user': 'samnthos',
+      'avatar': 'assets/images/avatar-2.png',
+    },
+    {
+      'name': 'Mary',
+      'user': 'gidiboy',
+      'avatar': 'assets/images/avatar-3.png',
+    },
+    {
+      'name': 'Julian',
+      'user': 'gistblog',
+      'avatar': 'assets/images/avatar-4.png',
+    },
+    {
+      'name': 'Sara',
+      'user': 'olori',
+      'avatar': 'assets/images/avatar-5.png',
+    },
+    {
+      'name': 'Kabir Singh',
+      'user': 'supergirl',
       'avatar': 'assets/images/avatar-6.png',
     }
   ];
@@ -77,50 +112,50 @@ class _ContactPageState extends State<ContactPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 50,),
-            FadeInUp(
-              duration: Duration(milliseconds: 500),
-              child: Container(
-                width: double.infinity,
-                height: 300,
-                padding: EdgeInsets.all(90.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.grey.shade200, width: 1.0),
-                ),
-                child: Stack(
-                  children: [
-                    for (double i = 0; i < 360; i += 60)
-                      AnimChain(
-                        initialDelay: Duration(milliseconds: i.toInt())
-                      )
-                      .next(
-                        wait: Duration(milliseconds: 1000),
-                        widget: AnimatedAlignPositioned(
-                          dx: 0,
-                          dy: 150,
-                          duration: Duration(seconds: 1),
-                          rotateDegrees: 0,
-                          touch: Touch.middle,
-                          child: user(0, i),
-                        ),
-                      )
-                      .next(
-                        wait: Duration(seconds: 2),
-                        widget: AnimatedAlignPositioned(
-                          dx: i / 360,
-                          dy: 150,
-                          duration: Duration(seconds: 1),
-                          rotateDegrees: i,
-                          touch: Touch.middle,
-                          child: user(0, i),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 80,),
+            SizedBox(height: 10,),
+            // FadeInUp(
+            //   duration: Duration(milliseconds: 500),
+            //   child: Container(
+            //     width: double.infinity,
+            //     height: 300,
+            //     padding: EdgeInsets.all(90.0),
+            //     decoration: BoxDecoration(
+            //       shape: BoxShape.circle,
+            //       border: Border.all(color: Colors.grey.shade200, width: 1.0),
+            //     ),
+            //     child: Stack(
+            //       children: [
+            //         for (double i = 0; i < 360; i += 60)
+            //           AnimChain(
+            //             initialDelay: Duration(milliseconds: i.toInt())
+            //           )
+            //           .next(
+            //             wait: Duration(milliseconds: 1000),
+            //             widget: AnimatedAlignPositioned(
+            //               dx: 0,
+            //               dy: 150,
+            //               duration: Duration(seconds: 1),
+            //               rotateDegrees: 0,
+            //               touch: Touch.middle,
+            //               child: user(0, i),
+            //             ),
+            //           )
+            //           .next(
+            //             wait: Duration(seconds: 2),
+            //             widget: AnimatedAlignPositioned(
+            //               dx: i / 360,
+            //               dy: 150,
+            //               duration: Duration(seconds: 1),
+            //               rotateDegrees: i,
+            //               touch: Touch.middle,
+            //               child: user(0, i),
+            //             ),
+            //           ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            //SizedBox(height: 80,),
             FadeInRight(
               duration: Duration(milliseconds: 500),
               child: Padding(
@@ -159,7 +194,7 @@ class _ContactPageState extends State<ContactPage> {
                               backgroundImage: AssetImage(_contacts[index]['avatar']),
                             ),
                             SizedBox(height: 10,),
-                            Text(_contacts[index]['name'], style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),),
+                            Text('@' + _contacts[index]['user'], style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),),
                           ],
                         ),
                       ),
@@ -196,15 +231,22 @@ class _ContactPageState extends State<ContactPage> {
                                 backgroundColor: Colors.red[100],
                                 backgroundImage: AssetImage(_contacts[index]['avatar']),
                               ),
-                              SizedBox(width: 10,),
-                              Text(_contacts[index]['name'], style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),),
+                              SizedBox(width: 18,),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(_contacts[index]['name'], style: TextStyle(color: Colors.grey.shade900, fontWeight: FontWeight.w500, fontSize: 16),),
+                                  SizedBox(height: 5,),
+                                  Text('@' + _contacts[index]['user'], style: TextStyle(color: Colors.grey.shade500, fontSize: 13),),],
+                            ),
+                              //Text(_contacts[index]['name'], style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),),
                             ],
                           ),
-                          Spacer(),
-                          IconButton(
-                            icon: Icon(Icons.arrow_forward_ios, color: Colors.black, size: 15,),
-                            onPressed: () {},
-                          ),
+                          // Spacer(),
+                          // IconButton(
+                          //   icon: Icon(Icons.arrow_forward_ios, color: Colors.black, size: 15,),
+                          //   onPressed: () {},
+                          // ),
                         ],
                       ),
                     ),
