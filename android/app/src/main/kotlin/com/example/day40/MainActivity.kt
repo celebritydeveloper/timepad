@@ -1,4 +1,4 @@
-package com.mywrizt.payment
+package flutter.timepad.app
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine

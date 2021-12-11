@@ -1,9 +1,9 @@
-name: wrizt
-description: Payment for Everyone.
+name: timepad
+description: This is timepad, a small Time Tracker App
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -26,10 +26,10 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+#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
 dependencies:
   flutter:
     sdk: flutter
-
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -38,30 +38,22 @@ dependencies:
   animate_do: ^2.0.0
   pattern_formatter: ^2.0.0
   intl: ^0.17.0
-  qr_flutter: ^4.0.0
-  qr_code_scanner: ^0.5.2
   align_positioned: ^3.0.0
-  flutter_advanced_drawer: ^1.2.3+1
   material_dialogs: ^1.1.0
   google_nav_bar: ^5.0.5
-  line_icons: ^2.0.1
-  sticky_headers: ^0.2.0
-  share_plus: ^2.1.4
-  fluttertoast: ^8.0.8
   permission_handler: ^8.1.6
-  contacts_service: ^0.6.3
   flutter_slidable: ^0.6.0
-  fl_chart: ^0.40.2
-  flutter_svg: ^0.22.0
   flutter_svg_provider: ^0.1.10
-  flutter_verification_code: ^1.0.4
-  local_auth: ^1.1.0
-  flutter_screen_lock: ^4.0.4+2
-  intl_phone_number_input: ^0.7.0+2
-  file_picker: ^4.1.6
-  http: ^0.13.3
-  lottie: ^1.2.1
-
+  shared_preferences: ^2.0.7
+  flutter_custom_clippers: ^2.0.0
+  simple_animations: ^1.3.3
+  path_provider: ^2.0.4
+  animations: ^2.0.2
+  heroicons: ^0.3.0
+  date_picker_timeline: ^1.2.3
+  flutter_native_timezone: ^2.0.0
+  time_range: ^1.0.2
+  
 
 dev_dependencies:
   flutter_test:
@@ -79,7 +71,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -89,6 +80,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/lottie/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -103,24 +95,23 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Rota
+    - family: Rubik
       fonts:
-        - asset: assets/fonts/Rota-Black.otf
-        - asset: assets/fonts/Rota-BlackItalic.otf
-        - asset: assets/fonts/Rota-Bold.otf
-        - asset: assets/fonts/Rota-BoldItalic.otf
-        - asset: assets/fonts/Rota-ExtraBlack.otf
-        - asset: assets/fonts/Rota-ExtraBlackItalic.otf
-        - asset: assets/fonts/Rota-ExtraBold.otf
-        - asset: assets/fonts/Rota-ExtraBoldItalic.otf
-        - asset: assets/fonts/Rota-Light.otf
-        - asset: assets/fonts/Rota-LightItalic.otf
-        - asset: assets/fonts/Rota-Medium.otf
-        - asset: assets/fonts/Rota-MediumItalic.otf
+        - asset: assets/fonts/Rubik-Black.ttf
+        - asset: assets/fonts/Rubik-BlackItalic.ttf
+        - asset: assets/fonts/Rubik-Bold.ttf
+        - asset: assets/fonts/Rubik-BoldItalic.ttf
+        - asset: assets/fonts/Rubik-ExtraBold.ttf
+        - asset: assets/fonts/Rubik-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Rubik-Light.ttf
+        - asset: assets/fonts/Rubik-LightItalic.ttf
+        - asset: assets/fonts/Rubik-Medium.ttf
+        - asset: assets/fonts/Rubik-MediumItalic.ttf
+        - asset: assets/fonts/Rubik-Regular.ttf
 
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
+    - family: TimePadIcon
+      fonts:
+        - asset: assets/fonts/TimePadIcon.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

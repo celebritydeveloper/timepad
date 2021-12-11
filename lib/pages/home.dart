@@ -1,14 +1,13 @@
-import 'package:wrizt/pages/send.dart';
-import 'package:wrizt/theme/constants.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:timepad/models/TimePadIcon.dart';
+import 'package:timepad/pages/analytics.dart';
+import 'package:timepad/pages/create_task.dart';
+import 'package:timepad/pages/index.dart';
+import 'package:timepad/theme/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:iconsax/iconsax.dart';
 
-import 'account.dart';
-import 'wallet.dart';
-import 'contact.dart';
-import 'transactions.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,19 +15,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 2;
+  final GlobalKey<ScaffoldState> _scaffoldstate = new GlobalKey<ScaffoldState>();
+  int _selectedIndex = 0;
   
   List<Widget> _widgetOptions = <Widget>[
-    BankingPage(),
-    ContactPage(),
-    SendMoneyScreen(),
-    HistoryPage(),
-    SettingsPage(),
+    IndexPage(),
+    CreateTaskPage(),
+    AnalyticsPage()
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldstate,
       backgroundColor: Colors.white,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -58,26 +57,12 @@ class _HomePageState extends State<HomePage> {
               tabBackgroundColor: Colors.transparent,
               color: Colors.black,
               tabs: [
-                GButton(
-                  icon: Iconsax.wallet,
-                  text: 'Wallet',
-                ),
-                GButton(
-                  icon: Iconsax.bitcoin_convert,
-                  text: 'Crypto',
-                ),
-                GButton(
-                  icon: Iconsax.bank,
-                  text: 'Home',
-                ),
-                GButton(
-                  icon: Iconsax.clock,
-                  text: 'Transactions',
-                ),
-                GButton(
-                  icon: Iconsax.user,
-                  text: 'Profile',
-                ),
+                
+                GButton(icon: Iconsax.clock, iconColor: Colors.black),
+                
+                GButton(icon: Iconsax.add_circle, iconColor: Colors.black),
+
+                GButton(icon: Icons.pie_chart_sharp, iconColor: Colors.black),
               ],
               selectedIndex: _selectedIndex,
               onTabChange: (index) {
