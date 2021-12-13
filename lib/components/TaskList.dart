@@ -126,26 +126,29 @@ class _TaskListState extends State<TaskList> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-                children: widget.taskModel.tags
-                    .map(
-                      (tag) => new Card(
-                          margin: EdgeInsets.only(right: 4.0),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6.0)),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 3.0, horizontal: 5.0),
-                            child: Text(
-                              tag,
-                              style: TextStyle(
-                                  fontSize: 12.0, fontFamily: "Rubik"),
-                            ),
-                          )),
-                    )
-                    .toList()
-                // ],
-                ),
+            Expanded(
+              flex: 4,
+              child: Row(
+                  children: widget.taskModel.tags
+                      .map(
+                        (tag) => new Card(
+                            margin: EdgeInsets.only(right: 4.0),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0)),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 3.0, horizontal: 5.0),
+                              child: Text(
+                                tag,
+                                style: TextStyle(
+                                    fontSize: 12.0, fontFamily: "Rubik"),
+                              ),
+                            )),
+                      )
+                      .toList()
+                  // ],
+                  ),
+            ),
             isRunning == false || isCompleted
                 ? InkWell(
                     onTap: () {

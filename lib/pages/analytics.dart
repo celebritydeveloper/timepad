@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:timepad/models/TimePadIcon.dart';
@@ -10,7 +11,26 @@ class AnalyticsPage extends StatefulWidget {
   _AnalyticsPageState createState() => _AnalyticsPageState();
 }
 
-class _AnalyticsPageState extends State<AnalyticsPage> {
+class _AnalyticsPageState extends State<AnalyticsPage> with SingleTickerProviderStateMixin {
+  bool _isLoaded = false;
+  int _currentIndex = 0;
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _tabController = TabController(length: 2, vsync: this);
+
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        _isLoaded = true;
+      });
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,17 +143,228 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                             ),
                           ],
                         ),
-                        Text("1h 46m", style: TextStyle(fontSize: 32.0,
-                          color: Color.fromRGBO(7, 4, 23, 1), fontWeight: FontWeight.w500, fontFamily: "Rubik"),),
+                        Row(
+                          children: [
+                            RichText(
+                              text: TextSpan(text: "1",
+                                style: TextStyle(color: Color.fromRGBO(7, 4, 23, 1), fontSize: 32.0, fontWeight: FontWeight.bold, fontFamily: "Rubik" ),
+                                children: [
+                                  TextSpan(text: "h", style: TextStyle(color: Color.fromRGBO(7, 4, 23, 1), fontSize: 20.0, fontWeight: FontWeight.w300, fontFamily: "Rubik" ))
+                                ],
+                                
+                              ),
+                              
+                            ),
+
+                            SizedBox(width: 10.0,),
+
+                            RichText(
+                              text: TextSpan(text: "46",
+                                style: TextStyle(color: Color.fromRGBO(7, 4, 23, 1), fontSize: 32.0, fontWeight: FontWeight.bold ),
+                                children: [
+                                  TextSpan(text: "m", style: TextStyle(color: Color.fromRGBO(7, 4, 23, 1), fontSize: 20.0, fontWeight: FontWeight.w300 ))
+                                ],
+                                
+                              ),
+                              
+                            ),
+                          ],
+                        ),
+                        // Text("1h 46m", style: TextStyle(fontSize: 32.0,
+                        //   color: Color.fromRGBO(7, 4, 23, 1), fontWeight: FontWeight.w500, fontFamily: "Rubik"),),
                       ],
                     )
                   ),
-                ),
+                ),          
               ],
             ),
           ),
+
+
+          Container(
+            height: 48,
+            margin: EdgeInsets.symmetric(vertical: 15.0),
+            padding: EdgeInsets.all(3.0),
+            width: 250.0,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(233, 233, 255, 1),
+              borderRadius: BorderRadius.circular(10.0,),
+            ),
+            child: TabBar(
+              controller: _tabController,
+                      // give the indicator a decoration (color and border radius)
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0,),
+                color: Colors.white,
+              ),
+              labelColor: Colors.black,
+              unselectedLabelColor: Color.fromRGBO(7, 4, 23, 1),
+              tabs: [
+                Tab(text: 'Day',),
+          
+                Tab(text: 'Week',),
+              ],
+            ),
+          ),
+
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(left: 10.0, right: 15.0),
+                  width: double.infinity,
+                  height: 380,
+                  child: LineChart(
+                    mainData(),
+                    swapAnimationDuration: Duration(milliseconds: 1000),
+                    swapAnimationCurve: Curves.linear,
+                  ),
+                ),
+          
+                Container(
+                  padding: EdgeInsets.only(left: 10.0, right: 15.0),
+                  width: double.infinity,
+                  height: 380,
+                  child: LineChart(
+                    mainData(),
+                    swapAnimationDuration: Duration(milliseconds: 1000),
+                    swapAnimationCurve: Curves.linear,
+                  ),
+                ), 
+              ]
+            ),
+          ),
+
+          
         ],
       )
+    );
+  }
+
+  List<Color> gradientColors = [
+    const Color(0xff23b6e6),
+    const Color(0xff02d39a)
+  ];
+
+  LineChartData mainData() {
+    return LineChartData(
+      borderData: FlBorderData(
+        show: false,
+      ),
+      gridData: FlGridData(
+        show: true,
+        horizontalInterval: 1.6,
+        getDrawingHorizontalLine: (value) {
+          return FlLine(
+            dashArray: const [3, 3],
+            color: const Color(0xff37434d).withOpacity(0.2),
+            strokeWidth: 2,
+          );
+        },
+        drawVerticalLine: false
+      ),
+      titlesData: FlTitlesData(
+        show: true,
+        rightTitles: SideTitles(showTitles: false),
+        topTitles: SideTitles(showTitles: false),
+        bottomTitles: SideTitles(showTitles: false,
+        reservedSize: 22,
+        interval: 1,
+        getTextStyles: (context, value) => const TextStyle(
+          color: Color(0xff68737d),
+          fontWeight: FontWeight.bold,
+          fontSize: 11,
+        ),
+        getTitles: (value) {
+          switch (value.toInt()) {
+            case 0:
+              return 'Wed';
+            case 4:
+              return 'Thu';
+            case 8:
+              return 'Today';
+            case 11:
+              return 'Sat';
+
+          }
+          return '';
+        },
+        margin: 10,
+      ),
+
+      leftTitles: SideTitles(
+        showTitles: true,
+        interval: 1,
+        getTextStyles: (context, value) => const TextStyle(
+          color: Color(0xff68737d),
+          fontWeight: FontWeight.bold,
+          fontSize: 11,
+        ),
+        reservedSize: 25,
+        getTitles: (value) {
+          switch (value.toInt()) {
+            case 0:
+              return '2h30m';
+            case 4:
+              return '2h0m';
+            case 8:
+              return '1h15m';
+            case 11:
+              return '4h5m';
+
+          }
+          return '';
+        },
+        
+        margin: 10,
+      ),
+      ),
+    
+
+    minX: 0,
+    maxX: 11,
+    minY: 0,
+    maxY: 6,
+    lineBarsData: [
+      LineChartBarData(
+        spots: _isLoaded ? [
+          FlSpot(0, 3),
+          FlSpot(2.4, 2),
+          FlSpot(4.4, 3),
+          FlSpot(6.4, 3.1),
+          FlSpot(8, 4),
+          FlSpot(9.5, 4),
+          FlSpot(11, 5),
+        ] : [
+          FlSpot(0, 0),
+          FlSpot(2.4, 0),
+          FlSpot(4.4, 0),
+          FlSpot(6.4, 0),
+          FlSpot(8, 0),
+          FlSpot(9.5, 0),
+          FlSpot(11, 0),
+        ],
+
+        isCurved: true,
+        colors: gradientColors,
+        barWidth: 2,
+        dotData: FlDotData(
+          show: false
+        ),
+
+        belowBarData: BarAreaData(
+          show: true,
+          gradientFrom: Offset(0, 0),
+          gradientTo: Offset(0, 1),
+          colors: [
+            Color(0xff02d39a).withOpacity(0.1),
+            Color(0xff02d39a).withOpacity(0),
+          ]
+        )
+
+      )
+      ]
     );
   }
 }
